@@ -1,0 +1,8 @@
+schema_version: 2
+boundaries:
+  always: [read_repository, modify_scoped_source, add_tests, update_documentation, run_validation, update_progress]
+  ask: [add_runtime_dependency, change_database_schema, modify_authentication, modify_authorization, change_public_api, modify_ci, deploy_production]
+  never: [commit_secrets, disable_security_checks, weaken_tests_to_force_success, force_push_main, merge_own_pull_request, delete_production_data, change_commercial_priority]
+limits:
+  maximum_files_changed_without_review: 25
+  maximum_dependency_additions: 2

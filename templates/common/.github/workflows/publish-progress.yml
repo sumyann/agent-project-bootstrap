@@ -1,0 +1,18 @@
+name: Validate project progress
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".project/progress.yaml"
+  workflow_dispatch:
+
+jobs:
+  validate-progress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify agent harness
+        run: python scripts/verify-agent-harness.py
+      - name: Optional progress integration
+        run: echo "Configure this step to publish progress to your preferred tracker, registry, webhook, or artifact store."

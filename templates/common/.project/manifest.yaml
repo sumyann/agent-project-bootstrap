@@ -1,0 +1,14 @@
+schema_version: 2
+project:
+  id: {{project_id}}
+  name: {{project_name}}
+  profile: {{profile}}
+runtime:
+  language: {{language}}
+bootstrap:
+  generator: sumyann/agent-project-bootstrap
+  version: {{bootstrap_version}}
+  lock_file: .project/bootstrap-lock.yaml
+progress:
+  file: .project/progress.yaml
+  publisher: null

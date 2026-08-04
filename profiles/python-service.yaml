@@ -1,0 +1,17 @@
+id: python-service
+runtime:
+  language: python
+commands:
+  install: python -m pip install -e '.[dev]'
+  test: python -m pytest
+  validate: python -m pytest
+validation:
+  stages:
+    - {id: lint, command: ruff check ., speed: fast}
+    - {id: typecheck, command: mypy src, speed: medium}
+    - {id: tests, command: python -m pytest, speed: medium}
+required_checks: [tests, lint, typecheck, secret-scan]
+tooling:
+  required: [git, python]
+  recommended: [gh, rg, jq, yq, uv, gitleaks]
+  optional: [fd, ast-grep, difft, semgrep, trivy, act]

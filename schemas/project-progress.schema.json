@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Project progress",
+  "type": "object",
+  "required": ["schema_version", "project_id", "completed", "in_progress", "blocked", "next", "verification", "agent"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "project_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+    "updated_at": {"type": ["string", "null"]},
+    "current_milestone": {"type": ["string", "object", "null"]},
+    "completed": {"type": "array"},
+    "in_progress": {"type": "array"},
+    "blocked": {"type": "array"},
+    "next": {"type": "array"},
+    "verification": {"type": "object"},
+    "agent": {"type": "object"}
+  },
+  "additionalProperties": true
+}

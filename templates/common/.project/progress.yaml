@@ -1,0 +1,14 @@
+schema_version: 1
+project_id: {{project_id}}
+updated_at: null
+current_milestone: null
+completed: []
+in_progress: []
+blocked: []
+next: []
+verification:
+  tests_passed: null
+  validation_command: "{{validate_command}}"
+agent:
+  provider: null
+  confidence: null

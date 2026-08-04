@@ -1,0 +1,19 @@
+id: typescript-web
+runtime:
+  language: typescript
+commands:
+  install: npm ci
+  test: npm test -- --run
+  validate: npm run lint && npm run typecheck && npm test -- --run
+validation:
+  stages:
+    - {id: format, command: npm run format:check, speed: fast}
+    - {id: lint, command: npm run lint, speed: fast}
+    - {id: typecheck, command: npm run typecheck, speed: medium}
+    - {id: tests, command: npm test -- --run, speed: medium}
+    - {id: build, command: npm run build, speed: slow}
+required_checks: [build, lint, typecheck, tests, dependency-audit, secret-scan]
+tooling:
+  required: [git, node, npm]
+  recommended: [gh, rg, jq, yq, gitleaks]
+  optional: [fd, ast-grep, biome, knip, difft, semgrep, trivy, act]

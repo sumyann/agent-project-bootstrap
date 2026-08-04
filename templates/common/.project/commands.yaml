@@ -1,0 +1,19 @@
+schema_version: 2
+commands:
+  install:
+    command: "{{install_command}}"
+    safe_for_agent: true
+  test:
+    command: "{{test_command}}"
+    safe_for_agent: true
+  validate:
+    command: "{{validate_command}}"
+    safe_for_agent: true
+  verify_harness:
+    command: "python scripts/verify-agent-harness.py"
+    safe_for_agent: true
+  deploy:
+    command: null
+    safe_for_agent: false
+    approval_required: true
+validation_order: {{validation_order}}

@@ -1,3 +1,5 @@
+import subprocess
+import sys
 from pathlib import Path
 
 from agent_project_bootstrap.cli import audit_repo, init_repo, render_target_files
@@ -14,6 +16,23 @@ def test_init_audit_and_verify(tmp_path: Path) -> None:
     assert audit_repo(tmp_path, "python-service") == 0
     findings = verify_repository(tmp_path)
     assert not [finding for finding in findings if finding.level == "error"]
+
+
+def test_generated_verifier_runs_outside_repository_root(tmp_path: Path) -> None:
+    repository = tmp_path / "demo-project"
+    repository.mkdir()
+    assert init_repo(repository, "demo-project", "python-service", force=False) == 0
+
+    result = subprocess.run(
+        [sys.executable, str(repository / "scripts" / "verify-agent-harness.py")],
+        cwd=tmp_path,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "Agent harness verification passed." in result.stdout
 
 
 def test_existing_file_is_not_overwritten(tmp_path: Path) -> None:
